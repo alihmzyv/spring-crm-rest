@@ -5,6 +5,7 @@ import com.example.web_customer_tracker.entity.Customer;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @Repository
 public class CustomerDaoImpl implements CustomerDao {
     @Autowired
+    @Qualifier("sessionFactory")
     private SessionFactory sessionFactory;
 
     private Session getSession() {
