@@ -25,6 +25,13 @@ public class CustomExceptionHandler {
                 .body(new CustomerErrorResponse(HttpStatus.BAD_REQUEST.value(), exc.getMostSpecificCause().getMessage()));
     }
 
+    @ExceptionHandler
+    public ResponseEntity<CustomerErrorResponse> handleAll(Exception exc) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new CustomerErrorResponse(HttpStatus.BAD_REQUEST.value(), exc.getMessage()));
+    }
+
     public static List<CustomerErrorResponse> getErrorResponses(Errors errors) {
         return errors.getAllErrors().stream()
                 .map(objectError ->
