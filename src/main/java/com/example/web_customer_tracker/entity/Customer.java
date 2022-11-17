@@ -1,6 +1,9 @@
 package com.example.web_customer_tracker.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.hateoas.RepresentationModel;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -8,21 +11,23 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "customer")
+@JsonIgnoreProperties(value = {"id"})
 public class Customer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "first_name")
-    @NotBlank(message = "Customer should have a first name.")
+    @NotBlank(message = "Customer should have a non-empty \"firstName\" property.")
     private String firstName;
 
     @Column(name = "last_name")
-    @NotBlank(message = "Customer should have a last name.")
+    @NotBlank(message = "Customer should have a non-empty \"last name\".")
     private String lastName;
 
     @Column(name = "email")
-    @NotBlank(message = "Customer should have an email address.")
+    @NotBlank(message = "Customer should have a non-empty \"last name\".")
     @Email(message = "Customer should have a valid email address.")
     private String email;
 
@@ -39,24 +44,31 @@ public class Customer {
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getFirstName() {
         return firstName;
     }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
     public String getLastName() {
         return lastName;
     }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
